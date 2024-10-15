@@ -15,10 +15,10 @@ export default async function Home() {
 
   await prisma.toDo.updateMany({
     where: {
-      task: 'Go Die',
+      task: 'Go die'
     },
     data: {
-      task: 'Dont Die'
+      task: 'Dont die'
     }
   })
 
