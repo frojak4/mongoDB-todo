@@ -1,34 +1,23 @@
+import Input from "@/components/Input";
+import ToDoList from "@/components/ToDoList";
+import { Suspense } from "react";
 
-import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient();
+
+
+
 
 export default async function Home() {
 
-  await prisma.toDo.create({
-    data: {
-      task: 'Go die',
-      completed: true
-    }
-  })
-
-
-  await prisma.toDo.updateMany({
-    where: {
-      task: 'Go die'
-    },
-    data: {
-      task: 'Dont die'
-    }
-  })
-
-  const test = await prisma.toDo.findMany()
-
-  console.log(test)
 
   return (
-    <div>
-
+    <div className="flex justify-center">
+      <div className="w-4/5 mx-auto max-h-fit text-center mt-8">
+        <Input />
+        <Suspense fallback={<p>Loading....</p>}>
+          <ToDoList />
+        </Suspense>
+      </div>
     </div>
   );
 }
