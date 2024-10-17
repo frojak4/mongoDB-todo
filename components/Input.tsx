@@ -1,8 +1,8 @@
 'use client'
-
-import { createTask } from '@/app/utils/utils';
-import React from 'react'
+import { createTask, deleteAllTasks } from '@/app/utils/actions';
+import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom'
+import { DeleteAllForm } from './DeleteAllForm';
 
 
 const initialState = {
@@ -14,7 +14,7 @@ function SubmitButton() {
     const { pending } = useFormStatus();
 
     return (
-        <button type="submit" className="disabled:text-gray-500 bg-slate-900 p-2 m-2 disabled:cursor-default" disabled={pending}>Add Task</button>
+        <button type="submit" className="disabled:text-gray-500 disabled:bg-green-950 bg-green-800 p-2 disabled:cursor-default" disabled={pending}>Add Task</button>
     )
 }
 
@@ -22,14 +22,36 @@ const Input = () => {
 
     const [state, formAction] = useFormState(createTask, initialState)
 
+
+    const [input, setInput] = useState('');
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setInput(e.target.value)
+    }
+
+    useEffect(() => {
+        setInput('')
+    }, [state])
+
     return (
-        <form action={formAction} className="flex-col">
-            <div>
-                <input className="text-gray-700" required name="task" placeholder='Enter new todo' />
-                <SubmitButton />
+        <div className="mb-6">
+            <div className="flex justify-center">
+                <form action={formAction}>
+                    <input
+                        className="text-gray-700 p-2"
+                        required name="task"
+                        value={input}
+                        placeholder='Enter new todo'
+                        onChange={(e) => handleInputChange(e)} />
+                    <SubmitButton />
+                </form >
+                <DeleteAllForm />
             </div>
-            {state?.message}
-        </form >
+            <h3 className="text-red-500">{state?.message}</h3>
+
+
+        </div>
     )
 }
 

@@ -1,7 +1,8 @@
 'use client'
-import { deleteTask } from '@/app/utils/utils'
+import { deleteTask } from '@/app/utils/actions'
 import React from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
+import { MdDelete } from "react-icons/md";
 
 const initialState = {
     message: null
@@ -11,7 +12,7 @@ const DeleteButton = () => {
     const { pending } = useFormStatus();
 
     return (
-        <button type="submit" disabled={pending} className="disabled:text-gray-600">Delete</button>
+        <button type="submit" disabled={pending} className="disabled:text-teal-800 text-teal-400"><MdDelete /></button>
     )
 }
 

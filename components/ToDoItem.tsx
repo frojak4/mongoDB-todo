@@ -1,25 +1,26 @@
 
 import React from 'react'
 import DeleteForm from './DeleteForm'
-
-type ToDoItemProps = {
-    todo: {
-        task: string
-        completed: boolean
-        id: string
-    }
-}
+import { MotionDiv } from './MotionDiv'
+import ToDoText from './ToDoText'
+import { ToDoItemProps } from '@/app/utils/Types'
 
 
 const ToDoItem = ({ todo }: ToDoItemProps) => {
 
     return (
-        <div className="text-2xl mx-auto w-2/6 text-white p-6 m-2 text-start bg-gray-500 flex">
-            <h3 className="flex-1 truncate">
-                {todo.task}
-            </h3>
+        <MotionDiv
+            initial={{ rotate: 45, scale: 0 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+            }}
+            className="text-2xl mx-auto w-2/6 text-white p-6 m-2 text-start border-2 border-black bg-cyan-900 flex">
+            <ToDoText todo={todo} />
             <DeleteForm id={todo.id} />
-        </div>
+        </MotionDiv>
     )
 }
 
