@@ -1,9 +1,7 @@
-'use client'
+
 import { deleteAllTasks } from '@/app/utils/actions'
 import React from 'react'
 import { useFormStatus } from 'react-dom'
-
-
 const DeleteAllButton = () => {
     const { pending } = useFormStatus();
     return (

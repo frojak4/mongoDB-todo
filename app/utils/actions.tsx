@@ -62,7 +62,6 @@ export const toggleComplete = async (formData: FormData) => {
 
     const validated = schema.safeParse({ id: formData.get('id') })
 
-    console.log(validated.success);
     if (!validated.success) { return }
 
     const todo = await prisma.toDo.findFirst({
